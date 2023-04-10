@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
+import cors from 'cors';
 import helmet from 'helmet';
 import { connectDatabases } from "./src/utils/data";
 import { router } from "./src/router";
@@ -13,6 +14,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
+app.use(cors({origin: '*'}));
 app.use('/', router);
 
 const port = parseInt(process.env.PORT);
