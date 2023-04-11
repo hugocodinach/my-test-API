@@ -16,7 +16,7 @@ export async function putSettingsCredits(req, res)
 
     if (!await updateSettingsCredits(actionsCredits))
         return res.status(500).json({ status: "error", code: "PSC3" });
-    return res.status(200).json({ status: "success", code: "PSC2", data: {} });
+    return res.status(200).json({ status: "success", code: "PSC1", data: {} });
 }
 
 export async function getSettings(req, res)

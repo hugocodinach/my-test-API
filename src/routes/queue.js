@@ -2,12 +2,12 @@ import { addActionToQueue, deleteActionQueue, getQueueActions } from "../control
 
 export async function postQueueAction(req, res)
 {
-    const { name, launchDate } = req.body;
+    const { name } = req.body;
 
-    if (!name || !launchDate)
+    if (!name)
         return res.status(401).json({ status: "error", code: "PQ2" });
 
-    if (!await addActionToQueue({ name, launchDate }))
+    if (!await addActionToQueue(name))
         return res.status(500).json({ status: "error", code: "PQ3" });
     return res.status(200).json({ status: "success", code: "PQ1", data: {} });
 }

@@ -2,11 +2,17 @@ import { ObjectId } from 'mongodb';
 import actionLifetime from '../constants/actionLifeTime';
 import { queueActionModel } from "../schemas/queueAction";
 
-export async function addActionToQueue(action) {
-    const actionObject = new queueActionModel();
+export async function addActionToQueue(actionName) {
+    const queue = await getQueueActions();
+    if (!queue)
+        return null;
 
-    actionObject.name = action.name;
-    actionObject.launchDate = action.launchDate;
+    const actionObject = new queueActionModel();
+    const newDate = queue.length ? new Date(queue[queue.length - 1].launchDate) : new Date();
+    newDate.setTime(newDate.getTime() + actionLifetime);
+
+    actionObject.name = actionName;
+    actionObject.launchDate = newDate.toISOString();
     try {
         const res = await actionObject.save();
 
