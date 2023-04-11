@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import actionLifetime from '../constants/actionLifeTime';
 import { queueActionModel } from "../schemas/queueAction";
 
 export async function addActionToQueue(action) {
@@ -19,10 +20,27 @@ export async function addActionToQueue(action) {
     }
 }
 
-export async function deleteActionQueue(id) {
+export async function deleteActionQueue(id, skip = false) {
     try {
         const _id = new ObjectId(id);
         await queueActionModel.deleteOne({ _id });
+
+        if (!skip)
+            return true;
+
+        const otherQueueElements = await getQueueActions();
+
+        await Promise.all(otherQueueElements.map(async (action) => {
+            try {
+                const actionDate = new Date(action.launchDate);
+                actionDate.setTime(actionDate.getTime() - actionLifetime);
+
+                action.launchDate = actionDate.toISOString();
+                await action.save();
+            } catch (error) {
+                console.log(error);
+            }
+        }));
         return true;
     } catch (error) {
         console.log(error);

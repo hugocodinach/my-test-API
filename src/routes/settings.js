@@ -4,7 +4,7 @@ export async function putRefreshSettingsCredits(req, res)
 {
     if (!await refreshSettingsCredits())
         return res.status(500).json({ status: "error", code: "RS2" });
-    return res.status(200).json({ status: "success", code: "RS1" });
+    return res.status(200).json({ status: "success", code: "RS1", data: {} });
 }
 
 export async function putSettingsCredits(req, res)
@@ -16,7 +16,7 @@ export async function putSettingsCredits(req, res)
 
     if (!await updateSettingsCredits(actionsCredits))
         return res.status(500).json({ status: "error", code: "PSC3" });
-    return res.status(200).json({ status: "success", code: "PSC2" });
+    return res.status(200).json({ status: "success", code: "PSC2", data: {} });
 }
 
 export async function getSettings(req, res)

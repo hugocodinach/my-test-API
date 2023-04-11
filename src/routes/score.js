@@ -9,7 +9,7 @@ export async function putScore(req, res)
 
     if (!await updateScore({ playerScore, computerScore }))
         return res.status(500).json({ status: "error", code: "PS3" });
-    return res.status(200).json({ status: "success", code: "PS1" });
+    return res.status(200).json({ status: "success", code: "PS1", data: {} });
 }
 
 export async function getScore(req, res)
