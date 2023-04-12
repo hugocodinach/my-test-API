@@ -14,7 +14,6 @@ export async function initializeScore() {
 
         return scoreObject;
     } catch (error) {
-        console.log(error);
         return null;
     }
 }
@@ -25,7 +24,6 @@ export async function updateScore(score) {
 
         return true;
     } catch (error) {
-        console.log(error);
         return false;
     }
 }
@@ -38,8 +36,6 @@ export async function getScore() {
             return score[0];
         return null;
     } catch (error) {
-        console.log(error);
-
         return null;
     }
 }

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "",
-    "build": "babel index.js -d dist && babel ./src -d dist/src --copy-files",
+    "coverage": "c8 npm run test",
+    "test": "yarn run build && NODE_ENV=test mocha ./dist/test",
+    "build": "babel index.js -d dist && babel ./src -d dist/src --copy-files && babel ./test -d dist/test --copy-files",
     "start": "npm run build && NODE_ENV=production node dist/index.js"
   },
   "author": "",
@@ -22,6 +23,10 @@
   "devDependencies": {
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4"
+    "@babel/preset-env": "^7.21.4",
+    "c8": "^7.13.0",
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0"
   }
 }

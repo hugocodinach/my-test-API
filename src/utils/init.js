@@ -8,7 +8,6 @@ async function initializeScoreData() {
 		if (!score)
 			await initializeScore();
 	} catch (error) {
-		console.log(error);
 	}
 }
 
@@ -19,7 +18,6 @@ async function initializeSettingsData() {
 		if (!settings)
 			await initializeSettings();
 	} catch (error) {
-		console.log(error);
 	}
 }
 
@@ -28,7 +26,6 @@ async function initializeData() {
         await initializeScoreData();
         await initializeSettingsData();
 	} catch (error) {
-		console.log(error);
 	}
 }
 

@@ -17,7 +17,6 @@ export async function initializeSettings() {
 
         return settingsObject;
     } catch (error) {
-        console.log(error);
         return null;
     }
 }
@@ -38,7 +37,6 @@ export async function refreshSettingsCredits() {
 
         return true;
     } catch (error) {
-        console.log(error);
         return false;
     }
 }
@@ -49,7 +47,6 @@ export async function updateSettingsCredits(newCredits) {
 
         return true;
     } catch (error) {
-        console.log(error);
         return false;
     }
 }
@@ -62,8 +59,6 @@ export async function getSettings() {
             return settings[0];
         return null;
     } catch (error) {
-        console.log(error);
-
         return null;
     }
 }

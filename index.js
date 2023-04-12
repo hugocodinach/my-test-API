@@ -17,18 +17,22 @@ app.use(helmet());
 app.use(cors({origin: '*'}));
 app.use('/', router);
 
-const port = parseInt(process.env.PORT);
+if (process.env.NODE_ENV !== 'test') {
+    const port = parseInt(process.env.PORT);
 
-connectDatabases().then(_ => {
-    console.log("Databse connected !");
-    initializeData().then(_ => {
-        console.log("Data initialized !");
-    })
-}).catch(err => {
-    console.log("Database connection tunnels creation failed ! " + err.message);
-    process.exit(42);
-});
+    connectDatabases().then(_ => {
+        console.log("Databse connected !");
+        initializeData().then(_ => {
+            console.log("Data initialized !");
+        })
+    }).catch(err => {
+        console.log("Database connection tunnels creation failed ! " + err.message);
+        process.exit(42);
+    });
 
-app.listen(port, () => {
-    console.log(`app is listening to port ${port}`);
-});
+    app.listen(port, () => {
+        console.log(`app is listening to port ${port}`);
+    });
+}
+
+export { app };

@@ -21,7 +21,6 @@ export async function addActionToQueue(actionName) {
 
         return actionObject;
     } catch (error) {
-        console.log(error);
         return null;
     }
 }
@@ -44,12 +43,10 @@ export async function deleteActionQueue(id, skip = false) {
                 action.launchDate = actionDate.toISOString();
                 await action.save();
             } catch (error) {
-                console.log(error);
             }
         }));
         return true;
     } catch (error) {
-        console.log(error);
         return false;
     }
 }
@@ -60,8 +57,6 @@ export async function getQueueActions() {
 
         return actions;
     } catch (error) {
-        console.log(error);
-
         return null;
     }
 }
